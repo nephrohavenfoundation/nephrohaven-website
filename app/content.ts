@@ -7,7 +7,8 @@ export const heroVideo: HeroVideoSource | undefined = undefined;
 export const links = {
   award: "https://nursing.jnj.com/notes-on-nursing/nursehack4health-pitch-a-thon-2025-winners",
   dialysisStudy: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10612280/",
-  founder: "https://nursing.yale.edu/news/ysn-student-innovates-expand-access-to-lifesaving-kidney-care-ghana",
+  founder:
+    "https://nursing.yale.edu/news/ysn-student-innovates-expand-access-to-lifesaving-kidney-care-ghana",
   linkedIn: "https://gh.linkedin.com/company/nephrohaven-foundation",
 };
 
@@ -29,6 +30,10 @@ export const foundationLinks = [
 ];
 export const navigation = [...workLinks, ...foundationLinks];
 export const partnershipLink = { href: "/partners", label: "Partner with us" };
+export const legalLinks = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+];
 
 export const accessFigures = [
   { value: "7 of 16", label: "regions had no dialysis services" },
@@ -55,11 +60,36 @@ export const pilotSteps = [
 ];
 
 export const model = [
-  { title: "Solar energy", copy: "Combine solar and grid electricity to test lower energy costs and more reliable treatment.", image: "solar-study.webp", position: "62% 50%" },
-  { title: "Patient affordability", copy: "Apply energy savings as subsidies and assess the effect on patient costs.", image: "solar-care.webp", position: "64% 55%" },
-  { title: "Community access", copy: "Support screening, referral, National Health Insurance Scheme registration, and follow-up care.", image: "community-care.webp", position: "center" },
-  { title: "Mental health integration", copy: "Prepare to bring patient screening, support, and referral into dialysis care.", image: "whole-person-care.webp", position: "81% 50%" },
-  { title: "Workforce development", copy: "Prepare nurses and health professional students for compassionate kidney care, including mental health skills.", image: "care-training.webp", position: "center" },
+  {
+    title: "Solar energy",
+    copy: "Combine solar and grid electricity to test lower energy costs and more reliable treatment.",
+    image: "solar-study.webp",
+    position: "62% 50%",
+  },
+  {
+    title: "Patient affordability",
+    copy: "Apply energy savings as subsidies and assess the effect on patient costs.",
+    image: "solar-care.webp",
+    position: "64% 55%",
+  },
+  {
+    title: "Community access",
+    copy: "Support screening, referral, National Health Insurance Scheme registration, and follow-up care.",
+    image: "community-care.webp",
+    position: "center",
+  },
+  {
+    title: "Mental health integration",
+    copy: "Prepare to bring patient screening, support, and referral into dialysis care.",
+    image: "whole-person-care.webp",
+    position: "81% 50%",
+  },
+  {
+    title: "Workforce development",
+    copy: "Prepare nurses and health professional students for compassionate kidney care, including mental health skills.",
+    image: "care-training.webp",
+    position: "center",
+  },
 ];
 
 export const programs = [
@@ -112,22 +142,27 @@ export const programs = [
 export const questions = [
   {
     title: "What is NephroHaven Foundation?",
-    answer: "NephroHaven is a nonprofit working to expand access to sustainable kidney care through prevention, early detection, and solar-powered dialysis solutions.",
+    answer:
+      "NephroHaven is a nonprofit working to expand access to sustainable kidney care through prevention, early detection, and solar-powered dialysis solutions.",
   },
   {
     title: "What does solar-powered dialysis mean?",
-    answer: "Our initial model combines solar energy with grid electricity. The feasibility study will assess electricity costs, power-related treatment interruptions, and patient affordability.",
+    answer:
+      "Our initial model combines solar energy with grid electricity. The feasibility study will assess electricity costs, power-related treatment interruptions, and patient affordability.",
   },
   {
     title: "Have you demonstrated cost savings yet?",
-    answer: "Solar panels are installed, and commissioning and data collection are the next steps. We will share results when they are available.",
+    answer:
+      "Solar panels are installed, and commissioning and data collection are the next steps. We will share results when they are available.",
   },
   {
     title: "Does NephroHaven operate its own dialysis center?",
-    answer: "Our first solar installation is at Trust Premium Hospital in Osu, Accra. A dedicated NephroHaven center is a future concept.",
+    answer:
+      "Our first solar installation is at Trust Premium Hospital in Osu, Accra. A dedicated NephroHaven center is a future concept.",
   },
   {
     title: "Can organizations outside Ghana partner with you?",
-    answer: "Yes. We welcome local and international partners whose expertise or resources can advance the work in Ghana and help us develop the model for wider use.",
+    answer:
+      "Yes. We welcome local and international partners whose expertise or resources can advance the work in Ghana and help us develop the model for wider use.",
   },
 ];

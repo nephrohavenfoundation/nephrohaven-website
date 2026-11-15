@@ -20,10 +20,13 @@ export function HeroMedia({ video }: { video?: HeroVideoSource }) {
       setVideoAllowed(allowed);
       if (!allowed) setPlaying(false);
     };
-    const observer = new IntersectionObserver(([entry]) => {
-      inView = entry.intersectionRatio >= 0.1;
-      update();
-    }, { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.intersectionRatio >= 0.1;
+        update();
+      },
+      { threshold: 0.1 },
+    );
 
     observer.observe(frame.current);
     motion.addEventListener("change", update);
@@ -47,7 +50,13 @@ export function HeroMedia({ video }: { video?: HeroVideoSource }) {
     <div className="hero-media" ref={frame} aria-hidden="true">
       <picture>
         <source media="(max-width: 700px)" srcSet="/images/whole-person-hero-mobile.webp" />
-        <img src="/images/whole-person-care.webp" width="1250" height="704" alt="" fetchPriority="high" />
+        <img
+          src="/images/whole-person-care.webp"
+          width="1250"
+          height="704"
+          alt=""
+          fetchPriority="high"
+        />
       </picture>
       {video && (
         <video

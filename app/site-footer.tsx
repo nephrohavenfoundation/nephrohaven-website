@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { footerSocialLinks, foundationLinks, partnershipLink, pilotLink, workLinks } from "./content";
+import { CookieSettingsButton } from "./cookie-notice";
+import {
+  footerSocialLinks,
+  foundationLinks,
+  legalLinks,
+  partnershipLink,
+  pilotLink,
+  workLinks,
+} from "./content";
 
 const footerGroups = [
   {
@@ -8,10 +16,7 @@ const footerGroups = [
   },
   {
     title: "Foundation",
-    items: [
-      ...foundationLinks,
-      { label: "FAQs", href: "/faq" },
-    ],
+    items: [...foundationLinks, { label: "FAQs", href: "/faq" }],
   },
   {
     title: "Get involved",
@@ -50,7 +55,11 @@ export function SiteFooter() {
                 <ul>
                   {items.map(({ label, href }) => {
                     const NavLink = href === pilotLink.href ? "a" : Link;
-                    return <li key={href}><NavLink href={href}>{label}</NavLink></li>;
+                    return (
+                      <li key={href}>
+                        <NavLink href={href}>{label}</NavLink>
+                      </li>
+                    );
                   })}
                 </ul>
               </div>
@@ -58,25 +67,55 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <a className="footer-identity" href="/#top" aria-label="NephroHaven Foundation home">
+        <Link className="footer-identity" href="/#top" aria-label="NephroHaven Foundation home">
           <span className="footer-emblem" aria-hidden="true" />
-          <span className="footer-wordmark" aria-hidden="true">NephroHaven</span>
-        </a>
+          <span className="footer-wordmark" aria-hidden="true">
+            NephroHaven
+          </span>
+        </Link>
 
         <div className="footer-bottom">
-          <a className="text-link" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+          <div className="footer-meta">
+            <a className="text-link" href="#top">
+              Back to top <span aria-hidden="true">↑</span>
+            </a>
+            <nav className="footer-legal" aria-label="Legal">
+              {legalLinks.map(({ href, label }) => (
+                <Link key={href} href={href}>
+                  {label}
+                </Link>
+              ))}
+              <CookieSettingsButton />
+            </nav>
+          </div>
           <div className="footer-community">
             <span>© NephroHaven Foundation</span>
             <ul className="footer-socials" aria-label="Social media">
               {socialIcons.map(({ name, path }) => {
                 const href = footerSocialLinks[name];
-                const icon = <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={path} /></svg>;
+                const icon = (
+                  <svg
+                    width="19"
+                    height="19"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d={path} />
+                  </svg>
+                );
 
                 return (
                   <li key={name}>
-                    {href
-                      ? <a href={href} aria-label={name}>{icon}</a>
-                      : <span role="img" aria-label={name}>{icon}</span>}
+                    {href ? (
+                      <a href={href} aria-label={name}>
+                        {icon}
+                      </a>
+                    ) : (
+                      <span role="img" aria-label={name}>
+                        {icon}
+                      </span>
+                    )}
                   </li>
                 );
               })}

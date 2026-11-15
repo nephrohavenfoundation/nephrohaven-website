@@ -20,3 +20,8 @@ DESIGN_AND_BRAND_SYSTEM.md
 /NEXT_AGENT_PROMPT.md
 /tokens.css
 /public/images/solar-care-mobile.webp
+
+playwright-report/
+test-results/
+blob-report/
+coverage/

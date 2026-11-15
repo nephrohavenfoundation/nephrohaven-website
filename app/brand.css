@@ -25,20 +25,27 @@
   --gutter: clamp(1.25rem, 4.45vw, 4rem);
   --shell: 91rem;
   --section-pad: clamp(4.75rem, 10vw, 9rem);
-  --radius-button: .75rem;
+  --radius-button: 0.75rem;
   --radius-card: 1rem;
   --radius-media: 1.5rem;
-  --ease-standard: cubic-bezier(.4, 0, .2, 1);
-  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 150ms;
   --duration-normal: 250ms;
-  --scale-press: .97;
+  --scale-press: 0.97;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --duration-fast: 0ms; --duration-normal: 0ms; --scale-press: 1; }
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --scale-press: 1;
+  }
 }
 
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-  :root { --header-glass: var(--color-paper); --header-blur: 0px; }
+  :root {
+    --header-glass: var(--color-paper);
+    --header-blur: 0px;
+  }
 }

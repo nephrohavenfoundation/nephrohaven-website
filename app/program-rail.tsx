@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { programs } from "./content";
 
 const count = programs.length;
 const loopEdge = 2;
 const loop = [...programs.slice(-loopEdge), ...programs, ...programs.slice(0, loopEdge)];
+
+function subscribeToNothing() {
+  return () => {};
+}
 
 function centeredCard(rail: HTMLDivElement) {
   const center = rail.scrollLeft + rail.clientWidth / 2;
@@ -37,19 +41,24 @@ function scrollToCard(rail: HTMLDivElement, index: number, behavior: ScrollBehav
 export function ProgramRail() {
   const track = useRef<HTMLDivElement>(null);
   const finishTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const [enhanced, setEnhanced] = useState(false);
+  const enhanced = useSyncExternalStore(
+    subscribeToNothing,
+    () => true,
+    () => false,
+  );
   const [active, setActive] = useState(0);
+  const [positioned, setPositioned] = useState(false);
   const [settled, setSettled] = useState(true);
   const [autoplayAllowed, setAutoplayAllowed] = useState(false);
 
-  useLayoutEffect(() => {
-    setEnhanced(true);
-  }, []);
+  if (enhanced && !positioned) {
+    setPositioned(true);
+    setActive(loopEdge);
+  }
 
   useLayoutEffect(() => {
     if (!enhanced || !track.current) return;
     scrollToCard(track.current, loopEdge, "instant");
-    setActive(loopEdge);
   }, [enhanced]);
 
   useEffect(() => {
@@ -59,10 +68,13 @@ export function ProgramRail() {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let inView = false;
     const update = () => setAutoplayAllowed(inView && !preference.matches && !document.hidden);
-    const observer = new IntersectionObserver(([entry]) => {
-      inView = entry.intersectionRatio >= 0.6;
-      update();
-    }, { threshold: 0.6 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.intersectionRatio >= 0.6;
+        update();
+      },
+      { threshold: 0.6 },
+    );
     observer.observe(rail);
     preference.addEventListener("change", update);
     document.addEventListener("visibilitychange", update);
@@ -142,7 +154,12 @@ export function ProgramRail() {
           const isActive = active === index;
 
           return (
-            <article className="program-card" key={duplicate ? `${title}-loop-${index}` : title} data-active={isActive} aria-hidden={duplicate || undefined}>
+            <article
+              className="program-card"
+              key={duplicate ? `${title}-loop-${index}` : title}
+              data-active={isActive}
+              aria-hidden={duplicate || undefined}
+            >
               <div className="program-card-surface">
                 <div className="program-card-heading">
                   <h3>{title}</h3>
@@ -150,7 +167,11 @@ export function ProgramRail() {
                 </div>
                 <div className="program-card-body">
                   <p>{copy}</p>
-                  <ul>{activities.map((activity) => <li key={activity}>{activity}</li>)}</ul>
+                  <ul>
+                    {activities.map((activity) => (
+                      <li key={activity}>{activity}</li>
+                    ))}
+                  </ul>
                 </div>
                 <div className="program-timing" aria-hidden="true">
                   {isActive && settled && !duplicate && enhanced && (
@@ -171,7 +192,9 @@ export function ProgramRail() {
               aria-label={shortTitle}
               aria-current={selected === index ? "true" : undefined}
               onClick={() => select(index)}
-            ><span /></button>
+            >
+              <span />
+            </button>
           ))}
         </div>
       </div>

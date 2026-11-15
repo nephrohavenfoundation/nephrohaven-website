@@ -1,26 +1,54 @@
 import { links } from "../../content";
 import { ConceptImage, EditorialLink, PageHero, pageMetadata } from "../editorial";
 import { illustrations } from "../illustrations";
+import { PageJsonLd } from "../../page-json-ld";
 
-export const metadata = pageMetadata(
-  "Partner with us",
-  "Find out how funders, hospitals, community organizations, educators, public agencies, and technical partners can work with NephroHaven Foundation.",
-);
+export const metadata = pageMetadata("/partners");
 
 const contributions = [
-  { title: "Fund access and growth", copy: "Support patient affordability, community care, mental health integration, training, and the capacity to reach more people." },
-  { title: "Bring expertise and technology", copy: "Contribute solar engineering, equipment, maintenance, clinical expertise, research, or professional training." },
-  { title: "Build the next implementation", copy: "Help evaluate future sites, develop service partnerships, or explore mission-aligned funding for expansion." },
+  {
+    title: "Fund access and growth",
+    copy: "Support patient affordability, community care, mental health integration, training, and the capacity to reach more people.",
+  },
+  {
+    title: "Bring expertise and technology",
+    copy: "Contribute solar engineering, equipment, maintenance, clinical expertise, research, or professional training.",
+  },
+  {
+    title: "Build the next implementation",
+    copy: "Help evaluate future sites, develop service partnerships, or explore mission-aligned funding for expansion.",
+  },
 ];
 
 const partnerTypes = [
-  { title: "Funders, companies, and diaspora supporters", copy: "Provide grants, sponsorship, donations, or in-kind support for programs and growth." },
-  { title: "Government and public agencies", copy: "Collaborate on access, insurance pathways, workforce development, and evidence for wider implementation." },
-  { title: "Hospitals and private facilities", copy: "Explore renewable energy integration and how the model could work in your facility." },
-  { title: "Universities and training institutions", copy: "Collaborate on research, economic evaluation, mentorship, and professional education." },
-  { title: "Nonprofits and community organizations", copy: "Strengthen screening, referrals, insurance registration support, and continuing care." },
-  { title: "Energy and technical partners", copy: "Support solar system performance, equipment maintenance, monitoring, and future installations." },
-  { title: "Impact-focused financing partners", copy: "Explore mission-aligned financing for future expansion as feasibility evidence develops." },
+  {
+    title: "Funders, companies, and diaspora supporters",
+    copy: "Provide grants, sponsorship, donations, or in-kind support for programs and growth.",
+  },
+  {
+    title: "Government and public agencies",
+    copy: "Collaborate on access, insurance pathways, workforce development, and evidence for wider implementation.",
+  },
+  {
+    title: "Hospitals and private facilities",
+    copy: "Explore renewable energy integration and how the model could work in your facility.",
+  },
+  {
+    title: "Universities and training institutions",
+    copy: "Collaborate on research, economic evaluation, mentorship, and professional education.",
+  },
+  {
+    title: "Nonprofits and community organizations",
+    copy: "Strengthen screening, referrals, insurance registration support, and continuing care.",
+  },
+  {
+    title: "Energy and technical partners",
+    copy: "Support solar system performance, equipment maintenance, monitoring, and future installations.",
+  },
+  {
+    title: "Impact-focused financing partners",
+    copy: "Explore mission-aligned financing for future expansion as feasibility evidence develops.",
+  },
 ];
 
 // Owner review: confirm additional institutional relationships, award mark permissions,
@@ -45,11 +73,18 @@ const partners = [
 export default function PartnersPage() {
   return (
     <>
-      <PageHero title="Help make affordable kidney care possible" media={
-        <ConceptImage image={illustrations.partnership} priority />
-      }>
-        <p className="lead">Work with us to evaluate renewable energy for dialysis and help more people find and afford kidney care in Ghana.</p>
-        <EditorialLink href="#contact" button>Start a conversation</EditorialLink>
+      <PageJsonLd path="/partners" />
+      <PageHero
+        title="Help make affordable kidney care possible"
+        media={<ConceptImage image={illustrations.partnership} priority />}
+      >
+        <p className="lead">
+          Work with us to evaluate renewable energy for dialysis and help more people find and
+          afford kidney care in Ghana.
+        </p>
+        <EditorialLink href="#contact" button>
+          Start a conversation
+        </EditorialLink>
       </PageHero>
 
       <section className="editorial-chapter" id="contact">
@@ -61,7 +96,9 @@ export default function PartnersPage() {
               <div className="contact-option-copy">
                 <h3>Partnership inquiries</h3>
                 <p>Tell us about yourself, your organization, and how you’d like to contribute.</p>
-                <EditorialLink href={links.linkedIn} button>Connect on LinkedIn</EditorialLink>
+                <EditorialLink href={links.linkedIn} button>
+                  Connect on LinkedIn
+                </EditorialLink>
               </div>
             </article>
             <article>
@@ -80,7 +117,12 @@ export default function PartnersPage() {
         <div className="shell">
           <h2>Three ways to contribute</h2>
           <ol className="editorial-columns contribution-list">
-            {contributions.map(({ title, copy }) => <li key={title}><h3>{title}</h3><p>{copy}</p></li>)}
+            {contributions.map(({ title, copy }) => (
+              <li key={title}>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </li>
+            ))}
           </ol>
         </div>
       </section>
@@ -93,7 +135,10 @@ export default function PartnersPage() {
           </div>
           <dl className="editorial-definitions">
             {partnerTypes.map(({ title, copy }) => (
-              <div key={title}><dt>{title}</dt><dd>{copy}</dd></div>
+              <div key={title}>
+                <dt>{title}</dt>
+                <dd>{copy}</dd>
+              </div>
             ))}
           </dl>
         </div>
@@ -106,7 +151,14 @@ export default function PartnersPage() {
             {partners.map(({ title, copy, href, label, logo }) => (
               <article key={title}>
                 <div className="partner-mark" data-inverse={logo.inverse}>
-                  <img src={logo.src} width={logo.width} height={logo.height} alt="" loading="lazy" decoding="async" />
+                  <img
+                    src={logo.src}
+                    width={logo.width}
+                    height={logo.height}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <h3>{title}</h3>
                 <p>{copy}</p>
@@ -116,7 +168,11 @@ export default function PartnersPage() {
             <article>
               <ConceptImage image={illustrations.training} format="wide" />
               <h3>2025 NurseHack4Health™</h3>
-              <p>Track 2 award recognition for the proposed solar-powered dialysis model. Johnson &amp; Johnson, Microsoft, and SONSIEL presented the Pitch-A-Thon with support from the Johnson &amp; Johnson Foundation.</p>
+              <p>
+                Track 2 award recognition for the proposed solar-powered dialysis model. Johnson
+                &amp; Johnson, Microsoft, and SONSIEL presented the Pitch-A-Thon with support from
+                the Johnson &amp; Johnson Foundation.
+              </p>
               <EditorialLink href="/news#nursehack4health">Read about the award</EditorialLink>
             </article>
           </div>

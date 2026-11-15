@@ -13,7 +13,9 @@ export function ModelStory() {
     if (!story.current) return;
 
     const steps = Array.from(story.current.querySelectorAll(".model-step"));
-    const media = window.matchMedia("(min-width: 941px) and (min-height: 720px) and (prefers-reduced-motion: no-preference)");
+    const media = window.matchMedia(
+      "(min-width: 941px) and (min-height: 720px) and (prefers-reduced-motion: no-preference)",
+    );
     let frame: number | undefined;
 
     const update = () => {
@@ -49,13 +51,26 @@ export function ModelStory() {
       <div className="shell">
         <div className="section-head">
           <div>
-            <h2 id="model-heading">One model.<br />Connected components.</h2>
-            <p className="lead">Five parts work toward one goal: making kidney care more affordable and accessible.</p>
+            <h2 id="model-heading">
+              One model.
+              <br />
+              Connected components.
+            </h2>
+            <p className="lead">
+              Five parts work toward one goal: making kidney care more affordable and accessible.
+            </p>
           </div>
-          <a className="button button-dark" href="#pilot">Explore the pilot <span aria-hidden="true">↗</span></a>
+          <a className="button button-dark" href="#pilot">
+            Explore the pilot <span aria-hidden="true">↗</span>
+          </a>
         </div>
 
-        <div className="model-layout" data-enhanced={enhanced} ref={story} style={{ "--model-step-count": model.length } as CSSProperties}>
+        <div
+          className="model-layout"
+          data-enhanced={enhanced}
+          ref={story}
+          style={{ "--model-step-count": model.length } as CSSProperties}
+        >
           <ol className="model-steps">
             {model.map(({ title, copy, image, position }, index) => (
               <li className="model-step" key={title} data-active={index === active}>
@@ -63,7 +78,13 @@ export function ModelStory() {
                   <h3>{title}</h3>
                   <p>{copy}</p>
                 </div>
-                <img className="model-inline-image" src={`/images/${image}`} style={{ objectPosition: position }} alt="" loading="lazy" />
+                <img
+                  className="model-inline-image"
+                  src={`/images/${image}`}
+                  style={{ objectPosition: position }}
+                  alt=""
+                  loading="lazy"
+                />
               </li>
             ))}
           </ol>
@@ -74,7 +95,9 @@ export function ModelStory() {
                   <img
                     className="model-slide"
                     key={image}
-                    data-position={index === active ? "current" : index < active ? "before" : "after"}
+                    data-position={
+                      index === active ? "current" : index < active ? "before" : "after"
+                    }
                     src={`/images/${image}`}
                     style={{ objectPosition: position }}
                     alt=""
@@ -82,7 +105,9 @@ export function ModelStory() {
                 ))}
               </div>
               <div className="model-progress">
-                {model.map(({ title }, index) => <span key={title} data-active={index === active} />)}
+                {model.map(({ title }, index) => (
+                  <span key={title} data-active={index === active} />
+                ))}
               </div>
             </div>
           )}

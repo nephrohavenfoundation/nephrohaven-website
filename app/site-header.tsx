@@ -1,20 +1,31 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigation, partnershipLink, pilotLink } from "./content";
 import { SiteSearch } from "./site-search";
 
+function closeParentDialog(event: MouseEvent<HTMLAnchorElement>) {
+  event.currentTarget.closest("dialog")?.close();
+}
+
 export function SiteHeader({ variant = "home" }: { variant?: "home" | "interior" }) {
   const [scrolled, setScrolled] = useState(false);
   const panel = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
-  const currentPage = (href: string) => pathname === href ? "page" : undefined;
-  const renderNavLink = ({ href, label }: { href: string; label: string }, onClick?: () => void) => {
+  const currentPage = (href: string) => (pathname === href ? "page" : undefined);
+  const renderNavLink = (
+    { href, label }: { href: string; label: string },
+    onClick?: (event: MouseEvent<HTMLAnchorElement>) => void,
+  ) => {
     // Use native fragment navigation so the browser can focus and scroll to the pilot.
     const NavLink = href === pilotLink.href ? "a" : Link;
-    return <NavLink key={href} href={href} aria-current={currentPage(href)} onClick={onClick}>{label}</NavLink>;
+    return (
+      <NavLink key={href} href={href} aria-current={currentPage(href)} onClick={onClick}>
+        {label}
+      </NavLink>
+    );
   };
 
   useEffect(() => {
@@ -41,18 +52,36 @@ export function SiteHeader({ variant = "home" }: { variant?: "home" | "interior"
     <header className="site-header" data-scrolled={scrolled} data-variant={variant}>
       <nav className="shell main-nav" aria-label="Main navigation">
         <div className="nav-group">
-          <Link className="brand-link" href={variant === "home" ? "#top" : "/"} aria-label="NephroHaven Foundation home">
-            <img className="brand-light" src="/images/nephrohaven-white.webp" alt="" width="440" height="347" />
-            <img className="brand-color" src="/images/nephrohaven-color.webp" alt="" width="440" height="347" />
+          <Link
+            className="brand-link"
+            href={variant === "home" ? "#top" : "/"}
+            aria-label="NephroHaven Foundation home"
+          >
+            <img
+              className="brand-light"
+              src="/images/nephrohaven-white.webp"
+              alt=""
+              width="440"
+              height="347"
+            />
+            <img
+              className="brand-color"
+              src="/images/nephrohaven-color.webp"
+              alt=""
+              width="440"
+              height="347"
+            />
           </Link>
           <div className="nav-destinations">
-            <div className="desktop-links">
-              {navigation.map((item) => renderNavLink(item))}
-            </div>
+            <div className="desktop-links">{navigation.map((item) => renderNavLink(item))}</div>
             <SiteSearch />
           </div>
         </div>
-        <Link className="button nav-cta" href={partnershipLink.href} aria-current={currentPage(partnershipLink.href)}>
+        <Link
+          className="button nav-cta"
+          href={partnershipLink.href}
+          aria-current={currentPage(partnershipLink.href)}
+        >
           {partnershipLink.label}
         </Link>
         <button
@@ -63,7 +92,12 @@ export function SiteHeader({ variant = "home" }: { variant?: "home" | "interior"
           onClick={() => panel.current?.showModal()}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <path
+              d="M3 6h18M3 12h18M3 18h18"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
           </svg>
         </button>
       </nav>
@@ -82,12 +116,17 @@ export function SiteHeader({ variant = "home" }: { variant?: "home" | "interior"
             <form method="dialog">
               <button className="menu-trigger" type="submit" aria-label="Close menu" autoFocus>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="m5 5 14 14M19 5 5 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path
+                    d="m5 5 14 14M19 5 5 19"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </button>
             </form>
           </div>
-          {[...navigation, partnershipLink].map((item) => renderNavLink(item, () => panel.current?.close()))}
+          {[...navigation, partnershipLink].map((item) => renderNavLink(item, closeParentDialog))}
         </div>
       </dialog>
     </header>

@@ -28,7 +28,9 @@ export function SiteSearch() {
     ? index
       ? matches.length
         ? `${matches.length} result${matches.length === 1 ? "" : "s"}`
-        : index.unavailable ? "" : "No matches. Try a different search."
+        : index.unavailable
+          ? ""
+          : "No matches. Try a different search."
       : "Searching the website…"
     : "";
 
@@ -52,7 +54,12 @@ export function SiteSearch() {
       >
         <svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <circle cx="10.7" cy="10.7" r="6.5" stroke="currentColor" strokeWidth="1.6" />
-          <path d="m15.3 15.3 4.4 4.4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          <path
+            d="m15.3 15.3 4.4 4.4"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
         </svg>
       </button>
 
@@ -71,13 +78,20 @@ export function SiteSearch() {
             <form method="dialog">
               <button type="submit" className="search-close" aria-label="Close search">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  <path
+                    d="m6 6 12 12M18 6 6 18"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </button>
             </form>
           </div>
 
-          <label className="search-label" htmlFor={inputId}>Search pages and FAQs</label>
+          <label className="search-label" htmlFor={inputId}>
+            Search pages and FAQs
+          </label>
           <input
             id={inputId}
             type="search"
@@ -88,7 +102,8 @@ export function SiteSearch() {
             placeholder="Search pages and FAQs…"
             onChange={(event) => {
               setQuery(event.currentTarget.value);
-              if (!index && !loading && searchTerms(event.currentTarget.value).length) void refreshIndex();
+              if (!index && !loading && searchTerms(event.currentTarget.value).length)
+                void refreshIndex();
             }}
             onKeyDown={(event) => {
               const firstResult = results.current?.querySelector("a");
@@ -105,7 +120,9 @@ export function SiteSearch() {
           />
 
           <div className="search-body">
-            <p className="search-status" role="status">{status}</p>
+            <p className="search-status" role="status">
+              {status}
+            </p>
             {hasQuery && !!index?.unavailable && (
               <div className="search-retry">
                 <span>Some pages are temporarily unavailable.</span>
@@ -114,7 +131,11 @@ export function SiteSearch() {
                 </button>
               </div>
             )}
-            <ul className="search-results" ref={results} aria-label={hasQuery ? "Search results" : "Suggested pages"}>
+            <ul
+              className="search-results"
+              ref={results}
+              aria-label={hasQuery ? "Search results" : "Suggested pages"}
+            >
               {items.map(({ href, title, page, snippet }) => {
                 const ResultLink = href.includes("#") ? "a" : Link;
                 return (

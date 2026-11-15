@@ -1,0 +1,44 @@
+/* NephroHaven values for the homepage. The root tokens.css records the Heidi reference. */
+:root {
+  color-scheme: light;
+  --font-display: "Baskervville", Georgia, serif;
+  --font-sans: "DM Sans Variable", system-ui, sans-serif;
+
+  --color-canvas: #faf8f4;
+  --color-paper: #fffcf7;
+  --color-mist: #eef6f7;
+  --color-ink: #12343f;
+  --color-muted: #495f67;
+  --color-blue: #075985;
+  --color-teal: #006e75;
+  --color-mint: #6ccb9f;
+  --color-accent: #a9e8c8;
+  --color-accent-hover: #bdf0d6;
+  --color-border: #c6d4d3;
+  --color-inverse: #f7f6ed;
+  --color-inverse-muted: #c8dbe0;
+  --color-deep: #102a34;
+  --color-focus: #075985;
+  --header-glass: rgb(255 252 247 / 87%);
+  --header-blur: 4px;
+
+  --gutter: clamp(1.25rem, 4.45vw, 4rem);
+  --shell: 91rem;
+  --section-pad: clamp(4.75rem, 10vw, 9rem);
+  --radius-button: .75rem;
+  --radius-card: 1rem;
+  --radius-media: 1.5rem;
+  --ease-standard: cubic-bezier(.4, 0, .2, 1);
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --scale-press: .97;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-fast: 0ms; --duration-normal: 0ms; --scale-press: 1; }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  :root { --header-glass: var(--color-paper); --header-blur: 0px; }
+}

@@ -60,64 +60,60 @@ const partners: {
   copy?: string;
   href?: string;
   label?: string;
-  logo: { src: string; width: number; height: number; inverse: boolean; fit?: "cover" };
+  logo: { src: string; width: number; height: number; fit?: "cover" };
 }[] = [
   {
     title: "Trust Premium Hospital",
     copy: "Hospital partner for the solar and grid dialysis feasibility study in Osu, Accra.",
     href: "https://thetrusthospital.com/trust-premium-hospital/",
     label: "Visit Trust Premium Hospital",
-    logo: { src: "/images/the-trust-hospital-logo.png", width: 709, height: 288, inverse: false },
+    logo: { src: "/images/the-trust-hospital-logo.png", width: 709, height: 288 },
   },
   {
     title: "Akomapa Health",
     copy: "Community partner for screening, referrals, National Health Insurance Scheme registration support, and follow-up.",
     href: "https://www.akomapa.org/",
     label: "Visit Akomapa Health",
-    logo: { src: "/images/akomapa-health-green.png", width: 2000, height: 400, inverse: false },
+    logo: { src: "/images/akomapa-health-green.png", width: 2000, height: 400 },
   },
   {
     title: "Johnson & Johnson",
     copy: awardLine,
     href: links.award,
     label: "Read about the award",
-    logo: {
-      src: "/images/johnson-johnson-logo-black-and-white.png",
-      width: 2400,
-      height: 2400,
-      inverse: true,
-      fit: "cover",
-    },
+    logo: { src: "/images/johnson-johnson-logo.png", width: 2400, height: 2400, fit: "cover" },
   },
   {
     title: "Microsoft",
     copy: awardLine,
     href: links.award,
     label: "Read about the award",
-    logo: {
-      src: "/images/microsoft-logo-black-and-white.png",
-      width: 2400,
-      height: 513,
-      inverse: true,
-    },
+    logo: { src: "/images/microsoft-logo-transparent.png", width: 840, height: 205 },
   },
   {
     title: "SONSIEL",
     copy: awardLine,
     href: links.award,
     label: "Read about the award",
-    logo: { src: "/images/sonsiel-white-lgo.webp", width: 1500, height: 567, inverse: true },
+    logo: { src: "/images/sonsiel-logo.webp", width: 454, height: 148 },
   },
   {
     title: "Yale",
     copy: "Bernard Abeiku Mensah is a doctoral student at Yale School of Nursing.",
     href: links.founder,
     label: "Read the Yale profile",
-    logo: { src: "/images/yale-logo-white.png", width: 748, height: 324, inverse: true },
+    logo: { src: "/images/yale-university-logo.webp", width: 554, height: 451 },
   },
   {
     title: "Ghana Health Service",
-    logo: { src: "/images/ghs-official-logo.png", width: 1893, height: 2529, inverse: false },
+    logo: { src: "/images/ghs-official-logo.png", width: 1893, height: 2529 },
+  },
+  {
+    title: "2025 NurseHack4Health™",
+    copy: "Track 2 award recognition for the proposed solar-powered dialysis model. Johnson & Johnson, Microsoft, and SONSIEL presented the Pitch-A-Thon with support from the Johnson & Johnson Foundation.",
+    href: "/news#nursehack4health",
+    label: "Read about the award",
+    logo: { src: "/images/nh4h-logo.webp", width: 708, height: 143 },
   },
 ];
 
@@ -201,7 +197,7 @@ export default function PartnersPage() {
           <div className="editorial-columns partner-recognition">
             {partners.map(({ title, copy, href, label, logo }) => (
               <article key={title}>
-                <div className="partner-mark" data-inverse={logo.inverse}>
+                <div className="partner-mark">
                   <img
                     src={logo.src}
                     width={logo.width}
@@ -217,16 +213,6 @@ export default function PartnersPage() {
                 {href && label ? <EditorialLink href={href}>{label}</EditorialLink> : null}
               </article>
             ))}
-            <article>
-              <ConceptImage image={illustrations.training} format="wide" />
-              <h3>2025 NurseHack4Health™</h3>
-              <p>
-                Track 2 award recognition for the proposed solar-powered dialysis model. Johnson
-                &amp; Johnson, Microsoft, and SONSIEL presented the Pitch-A-Thon with support from
-                the Johnson &amp; Johnson Foundation.
-              </p>
-              <EditorialLink href="/news#nursehack4health">Read about the award</EditorialLink>
-            </article>
           </div>
         </div>
       </section>

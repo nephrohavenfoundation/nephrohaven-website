@@ -476,9 +476,6 @@
   border-radius: var(--radius-media);
   overflow: hidden;
 }
-.partner-mark[data-inverse="true"] {
-  background: var(--color-deep);
-}
 .partner-mark img,
 .partner-recognition .editorial-media img {
   box-sizing: border-box;

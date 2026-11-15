@@ -53,20 +53,71 @@ const partnerTypes = [
 
 // Owner review: confirm additional institutional relationships, award mark permissions,
 // contact details, inquiry delivery, and privacy copy before publishing those additions.
-const partners = [
+const awardLine = "Presented the 2025 NurseHack4Health Pitch-A-Thon.";
+
+const partners: {
+  title: string;
+  copy?: string;
+  href?: string;
+  label?: string;
+  logo: { src: string; width: number; height: number; inverse: boolean; fit?: "cover" };
+}[] = [
   {
     title: "Trust Premium Hospital",
     copy: "Hospital partner for the solar and grid dialysis feasibility study in Osu, Accra.",
     href: "https://thetrusthospital.com/trust-premium-hospital/",
     label: "Visit Trust Premium Hospital",
-    logo: { src: "/images/trust-hospital-white.png", width: 868, height: 869, inverse: true },
+    logo: { src: "/images/the-trust-hospital-logo.png", width: 709, height: 288, inverse: false },
   },
   {
     title: "Akomapa Health",
     copy: "Community partner for screening, referrals, National Health Insurance Scheme registration support, and follow-up.",
     href: "https://www.akomapa.org/",
     label: "Visit Akomapa Health",
-    logo: { src: "/images/akomapa-logo-dark.png", width: 2000, height: 400, inverse: false },
+    logo: { src: "/images/akomapa-health-green.png", width: 2000, height: 400, inverse: false },
+  },
+  {
+    title: "Johnson & Johnson",
+    copy: awardLine,
+    href: links.award,
+    label: "Read about the award",
+    logo: {
+      src: "/images/johnson-johnson-logo-black-and-white.png",
+      width: 2400,
+      height: 2400,
+      inverse: true,
+      fit: "cover",
+    },
+  },
+  {
+    title: "Microsoft",
+    copy: awardLine,
+    href: links.award,
+    label: "Read about the award",
+    logo: {
+      src: "/images/microsoft-logo-black-and-white.png",
+      width: 2400,
+      height: 513,
+      inverse: true,
+    },
+  },
+  {
+    title: "SONSIEL",
+    copy: awardLine,
+    href: links.award,
+    label: "Read about the award",
+    logo: { src: "/images/sonsiel-white-lgo.webp", width: 1500, height: 567, inverse: true },
+  },
+  {
+    title: "Yale",
+    copy: "Bernard Abeiku Mensah is a doctoral student at Yale School of Nursing.",
+    href: links.founder,
+    label: "Read the Yale profile",
+    logo: { src: "/images/yale-logo-white.png", width: 748, height: 324, inverse: true },
+  },
+  {
+    title: "Ghana Health Service",
+    logo: { src: "/images/ghs-official-logo.png", width: 1893, height: 2529, inverse: false },
   },
 ];
 
@@ -156,13 +207,14 @@ export default function PartnersPage() {
                     width={logo.width}
                     height={logo.height}
                     alt=""
+                    data-fit={logo.fit}
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
                 <h3>{title}</h3>
-                <p>{copy}</p>
-                <EditorialLink href={href}>{label}</EditorialLink>
+                {copy ? <p>{copy}</p> : null}
+                {href && label ? <EditorialLink href={href}>{label}</EditorialLink> : null}
               </article>
             ))}
             <article>

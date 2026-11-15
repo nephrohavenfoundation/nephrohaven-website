@@ -2,6 +2,7 @@ import { links } from "../../content";
 import { ConceptImage, EditorialLink, PageCta, PageHero, pageMetadata } from "../editorial";
 import { illustrations } from "../illustrations";
 import { PageJsonLd } from "../../page-json-ld";
+import { PersonCard, type Person } from "../person-card";
 
 export const metadata = pageMetadata("/about");
 
@@ -28,23 +29,33 @@ const principles = [
   },
 ];
 
-const leadership = [
+const leadership: Person[] = [
   {
+    id: "bernard-mensah",
     name: "Bernard Abeiku Mensah, MN, RN",
     role: "Founder and President",
     bio: "Bernard is a nurse and doctoral student at Yale School of Nursing. His experience at Cape Coast Teaching Hospital shaped the foundation’s focus on dialysis affordability and reliable energy.",
   },
   {
+    id: "jeanelle-forson",
     name: "Jeanelle Forson",
     role: "Chief Operations Officer",
     bio: "Jeanelle leads operational coordination and supports program development and delivery.",
   },
   {
+    id: "brian-fleischer",
     name: "Brian Amu Fleischer, MD",
     role: "Chief Strategy Officer",
     bio: "Brian leads strategy, partnerships, innovation, and long-term planning for NephroHaven.",
   },
 ];
+
+const advisory: Person[] = [1, 2, 3].map((slot) => ({
+  id: `advisory-${slot}`,
+  name: "Advisory board member",
+  role: "To be announced",
+  bio: "Biography coming soon.",
+}));
 
 // Owner review: confirm preferred names, current credentials and roles, full biographies, and photo permissions.
 const foundingTeam = [
@@ -69,6 +80,32 @@ export default function AboutPage() {
         </p>
         <EditorialLink href="#founder">Read our founder’s story</EditorialLink>
       </PageHero>
+
+      <section className="editorial-chapter" id="team">
+        <div className="shell">
+          <h2>Leadership</h2>
+          <ul className="person-grid">
+            {leadership.map((person) => (
+              <li key={person.id}>
+                <PersonCard person={person} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="editorial-chapter editorial-mist" id="advisory">
+        <div className="shell">
+          <h2>Advisory board</h2>
+          <ul className="person-grid">
+            {advisory.map((person) => (
+              <li key={person.id}>
+                <PersonCard person={person} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <section className="editorial-chapter editorial-mist">
         <div className="shell">
@@ -137,19 +174,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="editorial-chapter" id="team">
+      <section className="editorial-chapter">
         <div className="shell">
-          <h2>Leadership</h2>
-          <ul className="editorial-columns">
-            {leadership.map(({ name, role, bio }) => (
-              <li key={name}>
-                <h3>{name}</h3>
-                <p className="editorial-meta">{role}</p>
-                <p>{bio}</p>
-              </li>
-            ))}
-          </ul>
-          <div className="editorial-photo-row editorial-following">
+          <div className="editorial-photo-row">
             <div className="editorial-photo-copy editorial-prose">
               <h2>Our founding team</h2>
               <p>

@@ -87,6 +87,15 @@ for (const route of routes) {
   });
 }
 
+test("about leadership bio opens from the card", async ({ page }) => {
+  await page.goto("/about");
+  await expect(page.getByRole("heading", { name: "Advisory board" })).toBeVisible();
+  await page.getByRole("button", { name: /Bernard Abeiku Mensah/ }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText(/Cape Coast Teaching Hospital/)).toBeVisible();
+});
+
 test("faq answer opens from the question", async ({ page }) => {
   await page.goto("/faq");
   await page.locator("summary", { hasText: "What is NephroHaven Foundation?" }).click();

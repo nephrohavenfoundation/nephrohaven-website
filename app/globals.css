@@ -374,43 +374,41 @@ svg {
 .partner-marquee-track {
   display: flex;
   width: max-content;
-  animation: partner-loop 25s linear infinite;
+  animation: partner-loop 70s linear infinite;
 }
 .partner-logo-set {
-  display: grid;
+  display: flex;
   flex: none;
-  width: max(36rem, min(var(--shell), calc(100vw - 2 * var(--gutter))));
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
-  justify-items: center;
-  padding-block: 0.3rem;
+  gap: 5rem;
+  padding-inline: 2.5rem;
 }
 .partner-logo {
   display: grid;
   place-items: center;
-  width: max-content;
-  max-width: calc(100% - 0.65rem);
-  min-height: 3.1rem;
-  padding: 0.32rem 0.5rem;
-  border-radius: 0.45rem;
+  flex: none;
+  width: 12.5rem;
+  height: 5rem;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 0.65rem;
 }
 .partner-logo img {
-  width: auto;
-  max-width: 100%;
-  max-height: 2.5rem;
+  width: 10rem;
+  height: 3.4rem;
   object-fit: contain;
+  mix-blend-mode: lighten;
 }
-.partner-logo-trust img {
-  max-height: clamp(3rem, 6vw, 5rem);
+.partner-logo[data-plate="light"] {
+  background: var(--color-paper);
 }
-.partner-logo-akomapa img {
-  width: clamp(8.25rem, 16vw, 13rem);
+.partner-logo[data-plate="light"] img {
+  mix-blend-mode: normal;
 }
-.partner-logo-award img {
-  width: clamp(8rem, 14vw, 11.5rem);
-  padding: 0.25rem 0.3rem;
-  border-radius: 0.35rem;
-  background-color: var(--color-paper);
+/* Square source with the mark in the center band. */
+.partner-logo img[data-fit="cover"] {
+  object-fit: cover;
 }
 .partner-marquee-viewport:has(:focus-visible) {
   mask-image: none;
@@ -420,7 +418,10 @@ svg {
   width: 100%;
 }
 .partner-marquee-viewport:has(:focus-visible) .partner-logo-set {
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
+  row-gap: 0.75rem;
 }
 .partner-marquee-viewport:has(:focus-visible) .partner-logo-set[aria-hidden] {
   display: none;
@@ -1094,9 +1095,9 @@ details[open] .disclosure-icon::after {
   flex: none;
   width: 0.93em;
   aspect-ratio: 232 / 253;
-  /* Use the emblem at the top of the original transparent logo asset. */
+  /* Crop the emblem from the top of the white logo. */
   mask: url("/images/nephrohaven-white.webp") 49.5% 20.2% / 189.65% auto no-repeat;
-  background: var(--color-accent);
+  background: var(--color-inverse);
 }
 .footer-wordmark {
   font: 400 1em/0.92 var(--font-display);
@@ -1497,7 +1498,10 @@ body.has-cookie-notice {
     width: 100%;
   }
   .partner-logo-set {
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
+    row-gap: 0.75rem;
   }
   .partner-logo-set[aria-hidden] {
     display: none;

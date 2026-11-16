@@ -56,7 +56,7 @@ export function PersonCard({ person }: { person: Person }) {
     <article className="person-card">
       <button type="button" onClick={() => dialog.current?.showModal()}>
         {person.image ? (
-          <img src={person.image} alt="" width="480" height="640" />
+          <img src={person.image} alt="" width="480" height="640" loading="lazy" decoding="async" />
         ) : (
           <span className="person-placeholder" aria-hidden="true">
             {initials(person.name)}

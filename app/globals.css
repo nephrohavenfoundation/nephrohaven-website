@@ -303,7 +303,7 @@ svg {
 .hero-media img,
 .hero-video {
   object-fit: cover;
-  object-position: left 49%;
+  object-position: center;
 }
 .hero-video {
   opacity: 0;
@@ -581,9 +581,7 @@ svg {
   position: absolute;
   inset: -3rem;
   z-index: -1;
-  background: center/cover url("/images/solar-care.webp");
-  filter: blur(44px);
-  opacity: 0.28;
+  background: radial-gradient(ellipse at 70% 90%, rgb(169 232 200 / 23%), transparent 60%);
 }
 .program-intro {
   text-align: center;
@@ -1025,10 +1023,7 @@ details[open] .disclosure-icon::after {
   position: absolute;
   z-index: -2;
   inset: 25% -1.5rem -1.5rem;
-  background: url("/images/solar-care.webp") center 76% / cover no-repeat;
-  mask-image: linear-gradient(to bottom, transparent, #000 75%);
-  filter: blur(13px) saturate(0.66);
-  opacity: 0.64;
+  background: radial-gradient(ellipse at 75% 100%, #386b76, transparent 70%);
 }
 .footer::after {
   content: "";
@@ -1369,14 +1364,10 @@ body.has-cookie-notice {
   .hero {
     --hero-height: max(37rem, calc(100svh - 6.45rem));
   }
-  .hero-media img,
-  .hero-video {
-    object-position: 51% 45%;
-  }
   .hero::before {
     background:
-      linear-gradient(90deg, rgb(11 27 30 / 48%), rgb(11 27 30 / 16%) 86%),
-      linear-gradient(0deg, rgb(11 27 30 / 88%), rgb(11 27 30 / 23%) 82%);
+      linear-gradient(90deg, rgb(11 27 30 / 64%), rgb(11 27 30 / 32%) 86%),
+      linear-gradient(0deg, rgb(11 27 30 / 90%), rgb(11 27 30 / 30%) 82%);
   }
   .hero-main {
     padding-block: 3.5rem 2.2rem;
@@ -1519,4 +1510,8 @@ body.has-cookie-notice {
   .nav-drawer[open] {
     animation: none;
   }
+}
+
+img[data-monochrome] {
+  filter: grayscale(1);
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { links } from "./content";
 import { faqEntries } from "./faq-entries";
+import { photos } from "./photos";
 
 export const siteName = "NephroHaven Foundation";
 export const shareImageSize = { width: 1200, height: 630 } as const;
@@ -26,7 +27,7 @@ export const sitePages: readonly SitePage[] = [
     headline: "More affordable dialysis. Powered by the sun.",
     description:
       "NephroHaven Foundation is developing a more affordable approach to kidney care through solar energy, community access, and whole-person support, starting in Ghana.",
-    image: "/images/whole-person-care.webp",
+    image: photos.solarRoof.src,
     changeFrequency: "weekly",
     priority: 1,
   },
@@ -38,7 +39,6 @@ export const sitePages: readonly SitePage[] = [
     headline: "A safe place for dialysis care",
     description:
       "Meet the nurse-led team behind NephroHaven Foundation and learn how frontline experience in Ghana shaped its mission for affordable kidney care.",
-    image: "/images/dialysis-room.webp",
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -50,7 +50,7 @@ export const sitePages: readonly SitePage[] = [
     headline: "Kidney care beyond each session",
     description:
       "Explore NephroHaven’s solar and grid feasibility study, community screening, planned mental health integration, and training for kidney care.",
-    image: "/images/community-care.webp",
+    image: photos.screening.src,
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -62,7 +62,7 @@ export const sitePages: readonly SitePage[] = [
     headline: "Lower delivery costs. Greater access.",
     description:
       "See how NephroHaven connects solar energy, patient affordability, community access, mental health, and workforce development in Ghana.",
-    image: "/images/whole-person-care.webp",
+    image: photos.solarRoof.src,
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -74,7 +74,7 @@ export const sitePages: readonly SitePage[] = [
     headline: "Help make affordable kidney care possible",
     description:
       "Find out how funders, hospitals, community organizations, educators, public agencies, and technical partners can work with NephroHaven Foundation.",
-    image: "/images/partnership-table.webp",
+    image: photos.gathering.src,
     changeFrequency: "monthly",
     priority: 0.8,
   },
@@ -86,7 +86,7 @@ export const sitePages: readonly SitePage[] = [
     headline: "News and progress from Ghana",
     description:
       "Follow NephroHaven’s solar installation at Trust Premium Hospital and its NurseHack4Health Pitch-A-Thon recognition.",
-    image: "/images/solar-study.webp",
+    image: photos.solarInstallation.src,
     changeFrequency: "weekly",
     priority: 0.7,
   },
@@ -98,7 +98,6 @@ export const sitePages: readonly SitePage[] = [
     headline: "Questions about NephroHaven",
     description:
       "Find answers about NephroHaven, solar-powered dialysis, patient subsidies, program availability, and getting involved.",
-    image: "/images/care-training.webp",
     changeFrequency: "monthly",
     priority: 0.6,
   },

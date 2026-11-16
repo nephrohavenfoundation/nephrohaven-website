@@ -3,6 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { model } from "./content";
+import { photos, type Photo } from "./photos";
+
+// Use a new photograph when the story moves from the pilot to community outreach.
+const storyPhotos: { step: number; photo: Photo }[] = [
+  { step: 0, photo: photos.hospital },
+  { step: 2, photo: photos.outreach },
+];
 
 export function ModelStory() {
   const story = useRef<HTMLDivElement>(null);
@@ -46,6 +53,8 @@ export function ModelStory() {
     };
   }, []);
 
+  const activePhoto = storyPhotos.findLastIndex(({ step }) => step <= active);
+
   return (
     <section id="model" className="model-story" aria-labelledby="model-heading" tabIndex={-1}>
       <div className="shell">
@@ -72,34 +81,42 @@ export function ModelStory() {
           style={{ "--model-step-count": model.length } as CSSProperties}
         >
           <ol className="model-steps">
-            {model.map(({ title, copy, image, position }, index) => (
-              <li className="model-step" key={title} data-active={index === active}>
-                <div className="model-step-copy">
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
-                <img
-                  className="model-inline-image"
-                  src={`/images/${image}`}
-                  style={{ objectPosition: position }}
-                  alt=""
-                  loading="lazy"
-                />
-              </li>
-            ))}
+            {model.map(({ title, copy }, index) => {
+              const photo = storyPhotos.find(({ step }) => step === index)?.photo;
+
+              return (
+                <li className="model-step" key={title} data-active={index === active}>
+                  <div className="model-step-copy">
+                    <h3>{title}</h3>
+                    <p>{copy}</p>
+                  </div>
+                  {photo && (
+                    <img
+                      className="model-inline-image"
+                      src={photo.src}
+                      width={photo.width}
+                      height={photo.height}
+                      data-monochrome={photo.monochrome || undefined}
+                      alt={photo.alt}
+                      loading="lazy"
+                    />
+                  )}
+                </li>
+              );
+            })}
           </ol>
           {enhanced && (
             <div className="model-stage" aria-hidden="true">
               <div className="model-frame">
-                {model.map(({ image, position }, index) => (
+                {storyPhotos.map(({ photo }, index) => (
                   <img
                     className="model-slide"
-                    key={image}
+                    key={photo.src}
                     data-position={
-                      index === active ? "current" : index < active ? "before" : "after"
+                      index === activePhoto ? "current" : index < activePhoto ? "before" : "after"
                     }
-                    src={`/images/${image}`}
-                    style={{ objectPosition: position }}
+                    src={photo.src}
+                    data-monochrome={photo.monochrome || undefined}
                     alt=""
                   />
                 ))}

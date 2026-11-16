@@ -63,32 +63,22 @@ export const model = [
   {
     title: "Solar energy",
     copy: "Combine solar and grid electricity to test lower energy costs and more reliable treatment.",
-    image: "solar-study.webp",
-    position: "62% 50%",
   },
   {
     title: "Patient affordability",
     copy: "Apply energy savings as subsidies and assess the effect on patient costs.",
-    image: "solar-care.webp",
-    position: "64% 55%",
   },
   {
     title: "Community access",
     copy: "Support screening, referral, National Health Insurance Scheme registration, and follow-up care.",
-    image: "community-care.webp",
-    position: "center",
   },
   {
     title: "Mental health integration",
     copy: "Prepare to bring patient screening, support, and referral into dialysis care.",
-    image: "whole-person-care.webp",
-    position: "81% 50%",
   },
   {
     title: "Workforce development",
     copy: "Prepare nurses and health professional students for compassionate kidney care, including mental health skills.",
-    image: "care-training.webp",
-    position: "center",
   },
 ];
 

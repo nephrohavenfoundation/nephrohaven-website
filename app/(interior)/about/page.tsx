@@ -1,6 +1,5 @@
 import { links } from "../../content";
-import { ConceptImage, EditorialLink, PageCta, PageHero, pageMetadata } from "../editorial";
-import { illustrations } from "../illustrations";
+import { EditorialLink, PageCta, PageHero, pageMetadata } from "../editorial";
 import { PageJsonLd } from "../../page-json-ld";
 import { PersonCard, type Person } from "../person-card";
 
@@ -32,18 +31,21 @@ const principles = [
 const leadership: Person[] = [
   {
     id: "bernard-mensah",
+    image: "/images/leadership/bernard-mensah.webp",
     name: "Bernard Abeiku Mensah, MN, RN",
     role: "Founder and President",
     bio: "Bernard is a nurse and doctoral student at Yale School of Nursing. His experience at Cape Coast Teaching Hospital shaped the foundation’s focus on dialysis affordability and reliable energy.",
   },
   {
     id: "jeanelle-forson",
+    image: "/images/leadership/jeanelle-forson.webp",
     name: "Jeanelle Forson",
     role: "Chief Operations Officer",
     bio: "Jeanelle leads operational coordination and supports program development and delivery.",
   },
   {
     id: "brian-fleischer",
+    image: "/images/leadership/brian-fleischer.webp",
     name: "Brian Amu Fleischer, MD",
     role: "Chief Strategy Officer",
     bio: "Brian leads strategy, partnerships, innovation, and long-term planning for NephroHaven.",
@@ -70,10 +72,7 @@ export default function AboutPage() {
   return (
     <>
       <PageJsonLd path="/about" />
-      <PageHero
-        title="A safe place for dialysis care"
-        media={<ConceptImage image={illustrations.dialysisCare} priority />}
-      >
+      <PageHero title="A safe place for dialysis care">
         <p className="lead">
           NephroHaven is a nurse-led nonprofit working to expand access to sustainable kidney care
           through prevention, early detection, and solar-powered dialysis solutions.
@@ -126,15 +125,12 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-          <div className="editorial-image-band">
-            <ConceptImage image={illustrations.accra} format="wide" />
-          </div>
         </div>
       </section>
 
       <section className="editorial-chapter" id="founder">
-        <div className="shell editorial-photo-row">
-          <div className="editorial-photo-copy editorial-prose">
+        <div className="shell">
+          <div className="editorial-prose editorial-deck">
             <h2>Our founder’s story</h2>
             <p>
               As a community nurse at Cape Coast Teaching Hospital, Bernard Abeiku Mensah saw
@@ -153,16 +149,12 @@ export default function AboutPage() {
               Read Yale School of Nursing’s profile
             </EditorialLink>
           </div>
-          <ConceptImage image={illustrations.communityCare} />
         </div>
       </section>
 
       <section className="editorial-chapter editorial-mist">
         <div className="shell editorial-split">
-          <div className="editorial-photo-heading">
-            <h2>What guides us</h2>
-            <ConceptImage image={illustrations.dialysisRoom} />
-          </div>
+          <h2>What guides us</h2>
           <dl className="editorial-definitions">
             {principles.map(({ title, copy }) => (
               <div key={title}>
@@ -176,20 +168,17 @@ export default function AboutPage() {
 
       <section className="editorial-chapter">
         <div className="shell">
-          <div className="editorial-photo-row">
-            <div className="editorial-photo-copy editorial-prose">
-              <h2>Our founding team</h2>
-              <p>
-                Our founding team brings together experience in clinical care, nursing research,
-                public health, biomedical engineering, and law.
-              </p>
-              <ul className="team-names">
-                {foundingTeam.map((name) => (
-                  <li key={name}>{name}</li>
-                ))}
-              </ul>
-            </div>
-            <ConceptImage image={illustrations.partnership} />
+          <div className="editorial-prose editorial-deck">
+            <h2>Our founding team</h2>
+            <p>
+              Our founding team brings together experience in clinical care, nursing research,
+              public health, biomedical engineering, and law.
+            </p>
+            <ul className="team-names">
+              {foundingTeam.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

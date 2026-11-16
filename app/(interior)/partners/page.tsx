@@ -1,6 +1,6 @@
 import { links } from "../../content";
-import { ConceptImage, EditorialLink, PageHero, pageMetadata } from "../editorial";
-import { illustrations } from "../illustrations";
+import { EditorialPhoto, EditorialLink, PageHero, pageMetadata } from "../editorial";
+import { photos } from "../../photos";
 import { PageJsonLd } from "../../page-json-ld";
 
 export const metadata = pageMetadata("/partners");
@@ -123,7 +123,7 @@ export default function PartnersPage() {
       <PageJsonLd path="/partners" />
       <PageHero
         title="Help make affordable kidney care possible"
-        media={<ConceptImage image={illustrations.partnership} priority />}
+        media={<EditorialPhoto image={photos.gathering} priority />}
       >
         <p className="lead">
           Work with us to evaluate renewable energy for dialysis and help more people find and
@@ -139,7 +139,6 @@ export default function PartnersPage() {
           <h2>Get in touch</h2>
           <div className="contact-options">
             <article>
-              <ConceptImage image={illustrations.accra} format="wide" />
               <div className="contact-option-copy">
                 <h3>Partnership inquiries</h3>
                 <p>Tell us about yourself, your organization, and how you’d like to contribute.</p>
@@ -149,7 +148,6 @@ export default function PartnersPage() {
               </div>
             </article>
             <article>
-              <ConceptImage image={illustrations.careDiscussion} format="wide" />
               <div className="contact-option-copy">
                 <h3>Questions about our work</h3>
                 <p>Find answers on the pilot, patient subsidies, and getting involved.</p>
@@ -176,10 +174,7 @@ export default function PartnersPage() {
 
       <section className="editorial-chapter">
         <div className="shell editorial-split">
-          <div className="editorial-photo-heading">
-            <h2>Find your partnership</h2>
-            <ConceptImage image={illustrations.solarRooftop} />
-          </div>
+          <h2>Find your partnership</h2>
           <dl className="editorial-definitions">
             {partnerTypes.map(({ title, copy }) => (
               <div key={title}>

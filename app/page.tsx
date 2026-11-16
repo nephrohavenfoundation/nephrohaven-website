@@ -9,6 +9,7 @@ import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
 import { Arrow } from "./arrow";
 import { PageJsonLd } from "./page-json-ld";
+import { photos } from "./photos";
 
 export default function Home() {
   return (
@@ -187,7 +188,13 @@ export default function Home() {
             </a>
           </div>
           <div className="partner-pilot inverse">
-            <img src="/images/solar-study.webp" width="1672" height="941" loading="lazy" alt="" />
+            <img
+              src={photos.solarInstallation.src}
+              width={photos.solarInstallation.width}
+              height={photos.solarInstallation.height}
+              loading="lazy"
+              alt=""
+            />
             <h2>Follow the pilot</h2>
             <a className="button button-quiet" href="#pilot">
               See what comes next <Arrow />

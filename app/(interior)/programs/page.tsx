@@ -1,13 +1,13 @@
 import { pilotSteps, programs } from "../../content";
 import {
-  ConceptImage,
+  EditorialPhoto,
   EditorialLink,
   PageCta,
   PageHero,
   pageMetadata,
   StatusDate,
 } from "../editorial";
-import { illustrations } from "../illustrations";
+import { photos } from "../../photos";
 import { PageJsonLd } from "../../page-json-ld";
 
 export const metadata = pageMetadata("/programs");
@@ -18,7 +18,7 @@ const chapters = [
   {
     id: "solar-study",
     program: study,
-    image: illustrations.solarInstallation,
+    image: photos.solarInstallation,
     description:
       "At Trust Premium Hospital in Osu, Accra, we plan to evaluate a system that combines solar and grid electricity in an existing dialysis unit. The findings will help identify what other facilities would need to use the approach.",
     partnership:
@@ -27,7 +27,7 @@ const chapters = [
   {
     id: "community",
     program: community,
-    image: illustrations.accra,
+    image: photos.screening,
     description:
       "Together with Akomapa Health, we help people identify health concerns earlier and find appropriate care. Outreach includes screening, health education, referrals, support with National Health Insurance Scheme (NHIS) registration, and follow-up.",
     partnership:
@@ -36,7 +36,6 @@ const chapters = [
   {
     id: "mental-health",
     program: mentalHealth,
-    image: illustrations.careDiscussion,
     description:
       "Living with kidney disease and receiving dialysis can take an emotional toll. We are preparing a program that pairs patient education and screening with nurse training and referrals for further assessment or support.",
     partnership:
@@ -45,7 +44,6 @@ const chapters = [
   {
     id: "training",
     program: training,
-    image: illustrations.training,
     description:
       "We are developing learning opportunities for nurses and health professional students. Training will connect clinical practice with patient communication, affordability, community referral, and mental health support. We will share participation and supervision details as the program develops.",
     partnership: "Collaborate on curriculum, mentorship, supervised learning, or program delivery.",
@@ -71,10 +69,7 @@ export default function ProgramsPage() {
   return (
     <>
       <PageJsonLd path="/programs" />
-      <PageHero
-        title="Kidney care beyond each session"
-        media={<ConceptImage image={illustrations.communityCare} priority />}
-      >
+      <PageHero title="Kidney care beyond each session">
         <p className="lead">
           Our programs address the cost of treatment, opportunities for earlier detection, the
           support patients need, and the skills of the professionals caring for them.
@@ -94,12 +89,12 @@ export default function ProgramsPage() {
       <div className="shell program-chapters">
         {chapters.map(({ id, program, image, description, partnership }, index) => (
           <section
-            className="editorial-photo-row editorial-chapter"
-            data-image-first={index % 2 === 1 || undefined}
+            className={image ? "editorial-photo-row editorial-chapter" : "editorial-chapter"}
+            data-image-first={(image && index % 2 === 1) || undefined}
             id={id}
             key={id}
           >
-            <div className="editorial-photo-copy">
+            <div className={image ? "editorial-photo-copy" : "editorial-deck"}>
               <h2>{program.title}</h2>
               <p className="editorial-meta">{program.status}</p>
               <div className="editorial-prose">
@@ -123,7 +118,7 @@ export default function ProgramsPage() {
                 )}
               </div>
             </div>
-            <ConceptImage image={image} />
+            {image && <EditorialPhoto image={image} />}
           </section>
         ))}
       </div>
@@ -143,9 +138,6 @@ export default function ProgramsPage() {
               </li>
             ))}
           </ul>
-          <div className="editorial-image-band">
-            <ConceptImage image={illustrations.dialysisRoom} format="wide" />
-          </div>
         </div>
       </section>
 

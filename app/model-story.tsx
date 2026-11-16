@@ -72,36 +72,48 @@ export function ModelStory() {
           style={{ "--model-step-count": model.length } as CSSProperties}
         >
           <ol className="model-steps">
-            {model.map(({ title, copy, image, position }, index) => (
+            {model.map(({ title, copy, photo, caption }, index) => (
               <li className="model-step" key={title} data-active={index === active}>
                 <div className="model-step-copy">
                   <h3>{title}</h3>
                   <p>{copy}</p>
                 </div>
-                <img
-                  className="model-inline-image"
-                  src={`/images/${image}`}
-                  style={{ objectPosition: position }}
-                  alt=""
-                  loading="lazy"
-                />
+                <figure className="model-inline-media">
+                  <img
+                    className="model-inline-image"
+                    src={photo.src}
+                    width={photo.width}
+                    height={photo.height}
+                    data-monochrome={photo.monochrome || undefined}
+                    alt={photo.alt}
+                    loading="lazy"
+                  />
+                  {caption && <figcaption className="model-caption">{caption}</figcaption>}
+                </figure>
               </li>
             ))}
           </ol>
           {enhanced && (
             <div className="model-stage" aria-hidden="true">
               <div className="model-frame">
-                {model.map(({ image, position }, index) => (
-                  <img
+                {model.map(({ photo, caption, title }, index) => (
+                  <div
                     className="model-slide"
-                    key={image}
+                    key={title}
                     data-position={
                       index === active ? "current" : index < active ? "before" : "after"
                     }
-                    src={`/images/${image}`}
-                    style={{ objectPosition: position }}
-                    alt=""
-                  />
+                  >
+                    <img
+                      src={photo.src}
+                      width={photo.width}
+                      height={photo.height}
+                      data-monochrome={photo.monochrome || undefined}
+                      loading="lazy"
+                      alt=""
+                    />
+                    {caption && <p className="model-caption">{caption}</p>}
+                  </div>
                 ))}
               </div>
               <div className="model-progress">

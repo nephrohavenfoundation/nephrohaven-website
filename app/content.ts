@@ -1,4 +1,5 @@
 import type { HeroVideoSource } from "./hero-media";
+import { photos, type Photo } from "./photos";
 
 // Add a public media path when the final background loop is ready.
 export const heroVideo: HeroVideoSource | undefined = undefined;
@@ -59,36 +60,33 @@ export const pilotSteps = [
   },
 ];
 
-export const model = [
+export const model: { title: string; copy: string; photo: Photo; caption?: string }[] = [
   {
     title: "Solar energy",
     copy: "Combine solar and grid electricity to test lower energy costs and more reliable treatment.",
-    image: "solar-study.webp",
-    position: "62% 50%",
+    photo: photos.rooftopInstallation,
   },
   {
     title: "Patient affordability",
     copy: "Apply energy savings as subsidies and assess the effect on patient costs.",
-    image: "solar-care.webp",
-    position: "64% 55%",
+    photo: photos.hospital,
   },
   {
     title: "Community access",
     copy: "Support screening, referral, National Health Insurance Scheme registration, and follow-up care.",
-    image: "community-care.webp",
-    position: "center",
+    photo: photos.outreach,
   },
   {
     title: "Mental health integration",
     copy: "Prepare to bring patient screening, support, and referral into dialysis care.",
-    image: "whole-person-care.webp",
-    position: "81% 50%",
+    photo: photos.conversation,
+    caption: "Akomapa Health outreach",
   },
   {
     title: "Workforce development",
     copy: "Prepare nurses and health professional students for compassionate kidney care, including mental health skills.",
-    image: "care-training.webp",
-    position: "center",
+    photo: photos.discussion,
+    caption: "Akomapa Health gathering",
   },
 ];
 

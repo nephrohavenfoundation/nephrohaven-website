@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { photos } from "./photos";
 
 export type HeroVideoSource = { src: string; type?: string };
 
@@ -48,16 +49,15 @@ export function HeroMedia({ video }: { video?: HeroVideoSource }) {
 
   return (
     <div className="hero-media" ref={frame} aria-hidden="true">
-      <picture>
-        <source media="(max-width: 700px)" srcSet="/images/whole-person-hero-mobile.webp" />
-        <img
-          src="/images/whole-person-care.webp"
-          width="1250"
-          height="704"
-          alt=""
-          fetchPriority="high"
-        />
-      </picture>
+      <img
+        src={photos.solarRoof.src}
+        srcSet={`/images/nephrohaven-images/solar-roof-small.webp 900w, ${photos.solarRoof.src} 1620w`}
+        sizes="100vw"
+        width={photos.solarRoof.width}
+        height={photos.solarRoof.height}
+        alt=""
+        fetchPriority="high"
+      />
       {video && (
         <video
           ref={player}

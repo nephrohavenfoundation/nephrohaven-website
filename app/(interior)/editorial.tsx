@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Arrow } from "../arrow";
-import type { Illustration } from "./illustrations";
+import type { Photo } from "../photos";
 
 export { pageMetadata } from "../site-seo";
 
@@ -89,23 +89,15 @@ export function StatusDate() {
   );
 }
 
-export function ConceptImage({
-  image,
-  format = "standard",
-  priority = false,
-}: {
-  image: Illustration;
-  format?: "standard" | "wide";
-  priority?: boolean;
-}) {
+export function EditorialPhoto({ image, priority = false }: { image: Photo; priority?: boolean }) {
   return (
-    <div className="editorial-media" data-format={format}>
+    <div className="editorial-media">
       <img
         src={image.src}
         width={image.width}
         height={image.height}
-        style={image.position ? { objectPosition: image.position } : undefined}
-        alt=""
+        data-monochrome={image.monochrome || undefined}
+        alt={image.alt}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : undefined}
         decoding="async"

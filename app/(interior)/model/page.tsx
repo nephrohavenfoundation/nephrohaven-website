@@ -1,13 +1,13 @@
 import { model, pilotSteps, programs } from "../../content";
 import {
-  ConceptImage,
+  EditorialPhoto,
   EditorialLink,
   PageCta,
   PageHero,
   pageMetadata,
   StatusDate,
 } from "../editorial";
-import { illustrations } from "../illustrations";
+import { photos } from "../../photos";
 import { PageJsonLd } from "../../page-json-ld";
 
 export const metadata = pageMetadata("/model");
@@ -58,7 +58,7 @@ export default function ModelPage() {
       <PageJsonLd path="/model" />
       <PageHero
         title="Lower delivery costs. Greater access."
-        media={<ConceptImage image={illustrations.solarRooftop} priority />}
+        media={<EditorialPhoto image={photos.solarRoof} priority />}
       >
         <p className="lead">
           Our model connects five components to make kidney care more affordable and accessible,
@@ -114,7 +114,7 @@ export default function ModelPage() {
                 other facilities.
               </p>
             </div>
-            <ConceptImage image={illustrations.dialysisRoom} />
+            <EditorialPhoto image={photos.hospital} />
           </div>
           <ul className="editorial-columns">
             {measures.map(({ title, copy }) => (
@@ -131,8 +131,8 @@ export default function ModelPage() {
       </section>
 
       <section className="editorial-chapter editorial-mist">
-        <div className="shell editorial-photo-row" data-image-first>
-          <div className="editorial-photo-copy editorial-prose">
+        <div className="shell">
+          <div className="editorial-prose editorial-deck">
             <h2>What we are developing next</h2>
             <p>
               We’re developing mental health screening and referral pathways and training for nurses
@@ -145,7 +145,6 @@ export default function ModelPage() {
             </p>
             <EditorialLink href="/programs#future">Explore the future concepts</EditorialLink>
           </div>
-          <ConceptImage image={illustrations.training} />
         </div>
       </section>
 

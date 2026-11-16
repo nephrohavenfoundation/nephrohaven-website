@@ -1,6 +1,6 @@
 import { links } from "../../content";
-import { ConceptImage, EditorialLink, PageCta, PageHero, pageMetadata } from "../editorial";
-import { illustrations } from "../illustrations";
+import { EditorialPhoto, EditorialLink, PageCta, PageHero, pageMetadata } from "../editorial";
+import { photos } from "../../photos";
 import { PageJsonLd } from "../../page-json-ld";
 
 export const metadata = pageMetadata("/news");
@@ -17,9 +17,9 @@ export default function NewsPage() {
       </PageHero>
 
       <div className="shell news-stories">
-        {/* Owner review: add the publication date and approved installation photography. */}
+        {/* Owner review: add the publication date. */}
         <article className="news-feature" id="solar-installation">
-          <ConceptImage image={illustrations.solarInstallation} priority />
+          <EditorialPhoto image={photos.solarDelivery} priority />
           <div className="news-story-copy editorial-prose">
             <p className="editorial-meta">Feasibility study</p>
             <h2>Solar panels installed at Trust Premium Hospital</h2>
@@ -39,8 +39,7 @@ export default function NewsPage() {
 
         <section className="editorial-chapter news-more" aria-labelledby="news-more-heading">
           <h2 id="news-more-heading">More updates</h2>
-          <article className="news-story" id="nursehack4health">
-            <ConceptImage image={illustrations.training} />
+          <article className="editorial-deck" id="nursehack4health">
             <div className="news-story-copy editorial-prose">
               <p className="editorial-meta">
                 Award announcement · <time dateTime="2026-01-08">January 8, 2026</time>

@@ -1,6 +1,6 @@
 import { links } from "../../content";
-import { ConceptImage, EditorialLink, PageHero, pageMetadata } from "../editorial";
-import { illustrations } from "../illustrations";
+import { EditorialPhoto, EditorialLink, PageHero, pageMetadata } from "../editorial";
+import { photos } from "../../photos";
 import { PageJsonLd } from "../../page-json-ld";
 
 export const metadata = pageMetadata("/partners");
@@ -53,20 +53,67 @@ const partnerTypes = [
 
 // Owner review: confirm additional institutional relationships, award mark permissions,
 // contact details, inquiry delivery, and privacy copy before publishing those additions.
-const partners = [
+const awardLine = "Presented the 2025 NurseHack4Health Pitch-A-Thon.";
+
+const partners: {
+  title: string;
+  copy?: string;
+  href?: string;
+  label?: string;
+  logo: { src: string; width: number; height: number; fit?: "cover" };
+}[] = [
   {
     title: "Trust Premium Hospital",
     copy: "Hospital partner for the solar and grid dialysis feasibility study in Osu, Accra.",
     href: "https://thetrusthospital.com/trust-premium-hospital/",
     label: "Visit Trust Premium Hospital",
-    logo: { src: "/images/trust-hospital-white.png", width: 868, height: 869, inverse: true },
+    logo: { src: "/images/the-trust-hospital-logo.png", width: 709, height: 288 },
   },
   {
     title: "Akomapa Health",
     copy: "Community partner for screening, referrals, National Health Insurance Scheme registration support, and follow-up.",
     href: "https://www.akomapa.org/",
     label: "Visit Akomapa Health",
-    logo: { src: "/images/akomapa-logo-dark.png", width: 2000, height: 400, inverse: false },
+    logo: { src: "/images/akomapa-health-green.png", width: 2000, height: 400 },
+  },
+  {
+    title: "Johnson & Johnson",
+    copy: awardLine,
+    href: links.award,
+    label: "Read about the award",
+    logo: { src: "/images/johnson-johnson-logo.png", width: 2400, height: 2400, fit: "cover" },
+  },
+  {
+    title: "Microsoft",
+    copy: awardLine,
+    href: links.award,
+    label: "Read about the award",
+    logo: { src: "/images/microsoft-logo-transparent.png", width: 840, height: 205 },
+  },
+  {
+    title: "SONSIEL",
+    copy: awardLine,
+    href: links.award,
+    label: "Read about the award",
+    logo: { src: "/images/sonsiel-logo.webp", width: 454, height: 148 },
+  },
+  {
+    title: "Yale",
+    copy: "Bernard Abeiku Mensah is a doctoral student at Yale School of Nursing.",
+    href: links.founder,
+    label: "Read the Yale profile",
+    logo: { src: "/images/yale-university-logo.webp", width: 554, height: 451 },
+  },
+  {
+    title: "Ghana Health Service",
+    logo: { src: "/images/ghs-official-logo.png", width: 1893, height: 2529 },
+  },
+  {
+    title: "2025 NurseHack4Health™",
+    copy: "Track 2 award recognition for the proposed solar-powered dialysis model. Johnson & Johnson, Microsoft, and SONSIEL presented the Pitch-A-Thon with support from the Johnson & Johnson Foundation.",
+    href: "/news#nursehack4health",
+    label: "Read about the award",
+    logo: { src: "/images/nh4h-logo.webp", width: 708, height: 143 },
   },
 ];
 
@@ -76,7 +123,7 @@ export default function PartnersPage() {
       <PageJsonLd path="/partners" />
       <PageHero
         title="Help make affordable kidney care possible"
-        media={<ConceptImage image={illustrations.partnership} priority />}
+        media={<EditorialPhoto image={photos.gathering} priority />}
       >
         <p className="lead">
           Work with us to evaluate renewable energy for dialysis and help more people find and
@@ -92,7 +139,6 @@ export default function PartnersPage() {
           <h2>Get in touch</h2>
           <div className="contact-options">
             <article>
-              <ConceptImage image={illustrations.accra} format="wide" />
               <div className="contact-option-copy">
                 <h3>Partnership inquiries</h3>
                 <p>Tell us about yourself, your organization, and how you’d like to contribute.</p>
@@ -102,7 +148,6 @@ export default function PartnersPage() {
               </div>
             </article>
             <article>
-              <ConceptImage image={illustrations.careDiscussion} format="wide" />
               <div className="contact-option-copy">
                 <h3>Questions about our work</h3>
                 <p>Find answers on the pilot, patient subsidies, and getting involved.</p>
@@ -129,10 +174,7 @@ export default function PartnersPage() {
 
       <section className="editorial-chapter">
         <div className="shell editorial-split">
-          <div className="editorial-photo-heading">
-            <h2>Find your partnership</h2>
-            <ConceptImage image={illustrations.solarRooftop} />
-          </div>
+          <h2>Find your partnership</h2>
           <dl className="editorial-definitions">
             {partnerTypes.map(({ title, copy }) => (
               <div key={title}>
@@ -150,31 +192,22 @@ export default function PartnersPage() {
           <div className="editorial-columns partner-recognition">
             {partners.map(({ title, copy, href, label, logo }) => (
               <article key={title}>
-                <div className="partner-mark" data-inverse={logo.inverse}>
+                <div className="partner-mark">
                   <img
                     src={logo.src}
                     width={logo.width}
                     height={logo.height}
                     alt=""
+                    data-fit={logo.fit}
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
                 <h3>{title}</h3>
-                <p>{copy}</p>
-                <EditorialLink href={href}>{label}</EditorialLink>
+                {copy ? <p>{copy}</p> : null}
+                {href && label ? <EditorialLink href={href}>{label}</EditorialLink> : null}
               </article>
             ))}
-            <article>
-              <ConceptImage image={illustrations.training} format="wide" />
-              <h3>2025 NurseHack4Health™</h3>
-              <p>
-                Track 2 award recognition for the proposed solar-powered dialysis model. Johnson
-                &amp; Johnson, Microsoft, and SONSIEL presented the Pitch-A-Thon with support from
-                the Johnson &amp; Johnson Foundation.
-              </p>
-              <EditorialLink href="/news#nursehack4health">Read about the award</EditorialLink>
-            </article>
           </div>
         </div>
       </section>

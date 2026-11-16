@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import sharp from "sharp";
+import { photos } from "./photos";
 import { previewCopy, shareImageSize, type SitePage } from "./site-seo";
 
 type ShareFont = {
@@ -37,20 +38,16 @@ function publicFile(path: string) {
   switch (path) {
     case "/images/nephrohaven-white.webp":
       return readFile(join(process.cwd(), "public/images/nephrohaven-white.webp"));
-    case "/images/solar-care.webp":
-      return readFile(join(process.cwd(), "public/images/solar-care.webp"));
-    case "/images/dialysis-room.webp":
-      return readFile(join(process.cwd(), "public/images/dialysis-room.webp"));
-    case "/images/community-care.webp":
-      return readFile(join(process.cwd(), "public/images/community-care.webp"));
-    case "/images/whole-person-care.webp":
-      return readFile(join(process.cwd(), "public/images/whole-person-care.webp"));
-    case "/images/partnership-table.webp":
-      return readFile(join(process.cwd(), "public/images/partnership-table.webp"));
-    case "/images/solar-study.webp":
-      return readFile(join(process.cwd(), "public/images/solar-study.webp"));
-    case "/images/care-training.webp":
-      return readFile(join(process.cwd(), "public/images/care-training.webp"));
+    case photos.solarRoof.src:
+      return readFile(join(process.cwd(), "public/images/nephrohaven-images/solar-roof.webp"));
+    case photos.solarInstallation.src:
+      return readFile(
+        join(process.cwd(), "public/images/nephrohaven-images/solar-installation.webp"),
+      );
+    case photos.screening.src:
+      return readFile(join(process.cwd(), "public/images/site-images/akomapa-screening.webp"));
+    case photos.gathering.src:
+      return readFile(join(process.cwd(), "public/images/site-images/akomapa-gathering.webp"));
     default: {
       const unknown: never = path as never;
       throw new Error(`Unknown share image: ${unknown}`);
@@ -103,8 +100,8 @@ async function heroShareImage(publicPath: string) {
     metadata.height ?? shareImageSize.height,
     shareImageSize.width,
     shareImageSize.height,
-    0,
-    0.49,
+    0.5,
+    0.5,
   );
   const png = await sharp(bytes)
     .extract(crop)

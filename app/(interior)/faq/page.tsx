@@ -1,15 +1,7 @@
 import Link from "next/link";
 import { faqEntries } from "../../faq-entries";
 import { FaqList } from "../../faq-list";
-import {
-  ConceptImage,
-  EditorialLink,
-  PageCta,
-  PageHero,
-  pageMetadata,
-  StatusDate,
-} from "../editorial";
-import { illustrations } from "../illustrations";
+import { EditorialLink, PageCta, PageHero, pageMetadata, StatusDate } from "../editorial";
 import { PageJsonLd } from "../../page-json-ld";
 
 export const metadata = pageMetadata("/faq");
@@ -32,10 +24,7 @@ export default function FaqPage() {
   return (
     <>
       <PageJsonLd path="/faq" />
-      <PageHero
-        title="Frequently asked questions"
-        media={<ConceptImage image={illustrations.dialysisRoom} priority />}
-      >
+      <PageHero title="Frequently asked questions">
         <p className="lead">
           Find out how the model works, where our programs stand, and how to get involved.
         </p>
@@ -45,7 +34,6 @@ export default function FaqPage() {
       <div className="shell interior-faq interior-faq-layout">
         <FaqList questions={fullQuestions} />
         <aside className="faq-related">
-          <ConceptImage image={illustrations.careDiscussion} />
           <h2>Kidney care beyond dialysis</h2>
           <p>See how screening, patient support, and training fit into the model.</p>
           <EditorialLink href="/model">Explore our model</EditorialLink>

@@ -63,6 +63,9 @@ for (const route of routes) {
     expect(response?.headers()["x-content-type-options"]).toBe("nosniff");
     expect(response?.headers()["x-frame-options"]).toBe("DENY");
     expect(response?.headers()["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+    expect(response?.headers()["permissions-policy"]).toBe(
+      "camera=(), microphone=(), geolocation=()",
+    );
     await expect(page.getByRole("heading", { level: 1, name: route.heading })).toBeVisible();
     await expect(page.getByRole("link", { name: "Privacy", exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: "Terms", exact: true })).toBeVisible();
@@ -87,6 +90,15 @@ for (const route of routes) {
   });
 }
 
+test("about leadership bio opens from the card", async ({ page }) => {
+  await page.goto("/about");
+  await expect(page.getByRole("heading", { name: "Advisory board" })).toBeVisible();
+  await page.getByRole("button", { name: /Bernard Abeiku Mensah/ }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText(/Cape Coast Teaching Hospital/)).toBeVisible();
+});
+
 test("faq answer opens from the question", async ({ page }) => {
   await page.goto("/faq");
   await page.locator("summary", { hasText: "What is NephroHaven Foundation?" }).click();
@@ -105,6 +117,72 @@ test("mobile menu reaches an interior page", async ({ page }) => {
     page.getByRole("heading", { level: 1, name: "A safe place for dialysis care" }),
   ).toBeVisible();
 });
+
+test("site search can navigate to a result with the keyboard", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Search website" }).click();
+  const dialog = page.getByRole("dialog", { name: "Search the site" });
+  const search = dialog.getByRole("searchbox");
+  await expect(search).toBeFocused();
+  await search.fill("privacy policy");
+  const result = dialog.getByRole("list", { name: "Search results" }).getByRole("link").first();
+  await expect(result).toHaveAttribute("href", "/privacy");
+  await search.press("ArrowDown");
+  await expect(result).toBeFocused();
+  await result.press("Enter");
+  await expect(page).toHaveURL("/privacy");
+});
+
+test("the model shows a different loaded photo for every desktop scroll step", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const model = page.locator("#model");
+  await expect(model.locator(".model-layout")).toHaveAttribute("data-enhanced", "true");
+  const steps = model.getByRole("listitem");
+  await expect(steps).toHaveCount(5);
+  const sources = new Set<string>();
+
+  for (const step of await steps.all()) {
+    await step.evaluate((element) =>
+      element.scrollIntoView({ block: "center", behavior: "instant" }),
+    );
+    await expect(step).toHaveAttribute("data-active", "true");
+    const photo = model.locator('.model-slide[data-position="current"] img');
+    await expect(photo).toHaveCount(1);
+    sources.add(
+      await photo.evaluate(async (image: HTMLImageElement) => {
+        await image.decode();
+        return image.currentSrc;
+      }),
+    );
+  }
+
+  expect(sources.size).toBe(5);
+});
+
+for (const layout of [
+  { name: "mobile", width: 390, height: 844, reducedMotion: "no-preference" },
+  { name: "reduced motion", width: 1440, height: 900, reducedMotion: "reduce" },
+] as const) {
+  test(`the model shows five inline photos with ${layout.name}`, async ({ page }) => {
+    await page.setViewportSize({ width: layout.width, height: layout.height });
+    await page.emulateMedia({ reducedMotion: layout.reducedMotion });
+    await page.goto("/");
+    const model = page.locator("#model");
+    await expect(model.locator(".model-stage")).toHaveCount(0);
+    const photos = model.getByRole("img");
+    await expect(photos).toHaveCount(5);
+
+    for (const photo of await photos.all()) {
+      await photo.scrollIntoViewIfNeeded();
+      await photo.evaluate((image: HTMLImageElement) => image.decode());
+    }
+
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      layout.width,
+    );
+  });
+}
 
 test("declining analytics keeps third-party scripts unloaded", async ({ page }) => {
   const urls: string[] = [];
@@ -151,7 +229,7 @@ test("sitemap, robots, and share images cover every page", async ({ request }) =
   expect(robots.ok()).toBe(true);
   expect(await robots.text()).toContain("/sitemap.xml");
 
-  for (const slug of ["home", "about", "privacy"]) {
+  for (const { slug } of routes) {
     const image = await request.get(`/og/${slug}`);
     expect(image.ok()).toBe(true);
     expect(image.headers()["content-type"]).toContain("image/png");

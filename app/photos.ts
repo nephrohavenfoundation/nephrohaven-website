@@ -25,6 +25,18 @@ export const photos = {
     height: 800,
     alt: "The entrance to Trust Hospital Premium Centre",
   },
+  rooftopInstallation: {
+    src: "/images/nephrohaven-images/rooftop-installation.webp",
+    width: 1200,
+    height: 800,
+    alt: "An installation crew works on solar panels on the hospital roof",
+  },
+  solarDelivery: {
+    src: "/images/nephrohaven-images/solar-delivery.webp",
+    width: 1200,
+    height: 900,
+    alt: "Workers unload solar panels from a truck outside the hospital",
+  },
   outreach: {
     src: "/images/site-images/akomapa-outreach.webp",
     width: 1200,
@@ -44,5 +56,18 @@ export const photos = {
     width: 1200,
     height: 800,
     alt: "People seated together at an outdoor Akomapa gathering",
+  },
+  conversation: {
+    src: "/images/site-images/akomapa-conversation.webp",
+    width: 950,
+    height: 952,
+    alt: "Two people speak across a table during an Akomapa Health outreach event",
+    monochrome: true,
+  },
+  discussion: {
+    src: "/images/site-images/akomapa-discussion.webp",
+    width: 1200,
+    height: 800,
+    alt: "A speaker addresses a group seated around a table at an Akomapa gathering",
   },
 } satisfies Record<string, Photo>;

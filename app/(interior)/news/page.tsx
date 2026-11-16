@@ -19,7 +19,7 @@ export default function NewsPage() {
       <div className="shell news-stories">
         {/* Owner review: add the publication date. */}
         <article className="news-feature" id="solar-installation">
-          <EditorialPhoto image={photos.solarInstallation} priority />
+          <EditorialPhoto image={photos.solarDelivery} priority />
           <div className="news-story-copy editorial-prose">
             <p className="editorial-meta">Feasibility study</p>
             <h2>Solar panels installed at Trust Premium Hospital</h2>

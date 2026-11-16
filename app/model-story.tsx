@@ -3,13 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { model } from "./content";
-import { photos, type Photo } from "./photos";
-
-// Use a new photograph when the story moves from the pilot to community outreach.
-const storyPhotos: { step: number; photo: Photo }[] = [
-  { step: 0, photo: photos.hospital },
-  { step: 2, photo: photos.outreach },
-];
 
 export function ModelStory() {
   const story = useRef<HTMLDivElement>(null);
@@ -53,8 +46,6 @@ export function ModelStory() {
     };
   }, []);
 
-  const activePhoto = storyPhotos.findLastIndex(({ step }) => step <= active);
-
   return (
     <section id="model" className="model-story" aria-labelledby="model-heading" tabIndex={-1}>
       <div className="shell">
@@ -81,44 +72,48 @@ export function ModelStory() {
           style={{ "--model-step-count": model.length } as CSSProperties}
         >
           <ol className="model-steps">
-            {model.map(({ title, copy }, index) => {
-              const photo = storyPhotos.find(({ step }) => step === index)?.photo;
-
-              return (
-                <li className="model-step" key={title} data-active={index === active}>
-                  <div className="model-step-copy">
-                    <h3>{title}</h3>
-                    <p>{copy}</p>
-                  </div>
-                  {photo && (
-                    <img
-                      className="model-inline-image"
-                      src={photo.src}
-                      width={photo.width}
-                      height={photo.height}
-                      data-monochrome={photo.monochrome || undefined}
-                      alt={photo.alt}
-                      loading="lazy"
-                    />
-                  )}
-                </li>
-              );
-            })}
+            {model.map(({ title, copy, photo, caption }, index) => (
+              <li className="model-step" key={title} data-active={index === active}>
+                <div className="model-step-copy">
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
+                <figure className="model-inline-media">
+                  <img
+                    className="model-inline-image"
+                    src={photo.src}
+                    width={photo.width}
+                    height={photo.height}
+                    data-monochrome={photo.monochrome || undefined}
+                    alt={photo.alt}
+                    loading="lazy"
+                  />
+                  {caption && <figcaption className="model-caption">{caption}</figcaption>}
+                </figure>
+              </li>
+            ))}
           </ol>
           {enhanced && (
             <div className="model-stage" aria-hidden="true">
               <div className="model-frame">
-                {storyPhotos.map(({ photo }, index) => (
-                  <img
+                {model.map(({ photo, caption, title }, index) => (
+                  <div
                     className="model-slide"
-                    key={photo.src}
+                    key={title}
                     data-position={
-                      index === activePhoto ? "current" : index < activePhoto ? "before" : "after"
+                      index === active ? "current" : index < active ? "before" : "after"
                     }
-                    src={photo.src}
-                    data-monochrome={photo.monochrome || undefined}
-                    alt=""
-                  />
+                  >
+                    <img
+                      src={photo.src}
+                      width={photo.width}
+                      height={photo.height}
+                      data-monochrome={photo.monochrome || undefined}
+                      loading="lazy"
+                      alt=""
+                    />
+                    {caption && <p className="model-caption">{caption}</p>}
+                  </div>
                 ))}
               </div>
               <div className="model-progress">
